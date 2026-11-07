@@ -1,0 +1,44 @@
+name: 문제 신고
+description: 스킬이 잘못 동작하거나 결과물이 이상할 때
+title: "[문제] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: 노트 원문, 답안, 학습 로그 내용, 로컬 경로는 적지 마세요. 이 저장소는 공개되어 있습니다.
+  - type: input
+    id: skill
+    attributes:
+      label: 어디서 생겼나요
+      placeholder: "예: /genius:grade, /genius:review chat, question agent"
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: 무슨 일이 있었나요
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 기대한 동작
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 다시 겪으려면
+      description: 알면 적어 주세요
+  - type: input
+    id: version
+    attributes:
+      label: genius 버전
+      placeholder: "예: 6.1.0"
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: 환경
+      placeholder: "예: macOS 26.1, Claude Code 2.1.292"

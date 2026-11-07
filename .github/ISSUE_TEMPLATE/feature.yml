@@ -1,0 +1,32 @@
+name: 개선 제안
+description: 불편한 점이나 바라는 동작이 있을 때
+title: "[제안] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: 노트 원문, 답안, 학습 로그 내용, 로컬 경로는 적지 마세요. 이 저장소는 공개되어 있습니다.
+  - type: input
+    id: skill
+    attributes:
+      label: 어디에 대한 건가요
+      placeholder: "예: /genius:test, 해설지 PDF, 복습 주기"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: 불편한 점
+    validations:
+      required: true
+  - type: textarea
+    id: want
+    attributes:
+      label: 원하는 동작
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: genius 버전
+      placeholder: "예: 6.1.0"
