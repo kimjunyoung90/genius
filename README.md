@@ -2,7 +2,9 @@
 
 공부 노트로 시험을 보고, 몰랐던 것을 학습 로그에 쌓아 간격 복습하는 Claude Code 플러그인입니다.
 
-## 들어 있는 것
+전체 구조는 [설계도](https://kimjunyoung90.github.io/genius/architecture.html)에서 볼 수 있습니다.
+
+## 제공 기능
 
 | 구성 | 하는 일 |
 |---|---|
