@@ -1,6 +1,6 @@
 ---
 name: grade
-description: 손글씨로 푼 시험지(첫 시험·복습 시험) PDF를 읽어 채점하고, 문제마다 해설을 붙인 해설지를 만든 뒤 학습 로그에 기록하는 스킬. chat이면 이 대화에서 본 대화형 시험의 문답으로 채점한다. 오답노트는 note가 만든다. 사용자가 "채점", "/genius:grade", "다 풀었어"라고 하면 사용한다. 경로는 플러그인 설정(userConfig), PDF 스크립트는 macOS 전용
+description: 손글씨로 푼 시험지(첫 시험·복습 시험) PDF를 읽어 채점하고, 문제마다 해설을 붙인 해설지를 만든 뒤 학습 로그에 기록하는 스킬. chat이면 이 대화에서 본 대화형 시험의 문답으로 채점한다. 오답노트는 note가 만든다. 사용자가 "채점", "/genius:grade", "다 풀었어"라고 하면 사용한다. 경로는 플러그인 설정(userConfig)
 argument-hint: "[푼 시험지 파일] | chat"
 disable-model-invocation: false
 ---
@@ -36,9 +36,9 @@ disable-model-invocation: false
 # 문제 번호("1.", "2." ...) 위치로 문제+필기 영역을 잘라 q1.png ... 로 저장 (아래 빈 공간은 자동으로 잘라냄)
 # 마지막 인자는 채점 표시: 문제 순서대로 O(정답) / T(부분 정답, 세모) / X(오답)를 쉼표로 (예: O,T,X,O,X,X)
 # 번호 위에 빨간 ○ △ ✕ 가 그려진다. `?` 정답은 일정상 부분 정답이지만 표시는 O로 한다.
-swift "<ROOT>/scripts/cropq.swift" "<시험지.pdf>" <스크래치패드>/crops <문제 수> <원래 시험지 페이지 수> "O,T,X,..."
+python3 "<ROOT>/scripts/cropq.py" "<시험지.pdf>" <스크래치패드>/crops <문제 수> <원래 시험지 페이지 수> "O,T,X,..."
 # crops/qN.png 를 <img>로 넣은 채점 HTML을 같은 스크래치패드 폴더에 만들고 변환
-swift "<ROOT>/scripts/html2pdf.swift" <스크래치패드>/graded.html <스크래치패드>/graded.pdf
+python3 "<ROOT>/scripts/html2pdf.py" <스크래치패드>/graded.html <스크래치패드>/graded.pdf
 ```
 - 만든 PDF를 읽어 문제마다 필기와 해설이 맞게 붙었는지 확인한다.
 - 확인되면 원래 시험지를 그 시험지가 있는 폴더의 `.원본/`(`<GENIUS>/시험/.원본/` 또는 `<GENIUS>/복습/.원본/`, 숨김 폴더)에 복사해 두고, 같은 이름으로 해설지를 덮어쓴다. 원본은 필기를 다시 고칠 수 있는 파일이다.

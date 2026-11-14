@@ -41,4 +41,4 @@ body:
     id: env
     attributes:
       label: 환경
-      placeholder: "예: macOS 26.1, Claude Code 2.1.292"
+      placeholder: "예: macOS 26.1 또는 Windows 11, Claude Code 2.1.292"

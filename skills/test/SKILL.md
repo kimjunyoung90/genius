@@ -1,6 +1,6 @@
 ---
 name: test
-description: 기록해 둔 몰랐던 것 중 아직 시험을 보지 않은 것으로 첫 시험을 내는 스킬. 학습 로그에서 대상을 고르고 TIL을 근거로 손글씨용 PDF 시험지를 만든다. chat이면 대화형으로 한 문제씩 낸다. 채점은 grade, 해설 확인과 오답노트는 note, 간격 복습은 review가 맡는다. 경로는 플러그인 설정(userConfig), PDF 스크립트는 macOS 전용
+description: 기록해 둔 몰랐던 것 중 아직 시험을 보지 않은 것으로 첫 시험을 내는 스킬. 학습 로그에서 대상을 고르고 TIL을 근거로 손글씨용 PDF 시험지를 만든다. chat이면 대화형으로 한 문제씩 낸다. 채점은 grade, 해설 확인과 오답노트는 note, 간격 복습은 review가 맡는다. 경로는 플러그인 설정(userConfig)
 argument-hint: "[chat]"
 disable-model-invocation: false
 ---

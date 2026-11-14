@@ -1,6 +1,6 @@
 ---
 name: review
-description: 학습 로그에서 다음 복습일이 된 행만 골라 다른 각도로 다시 내는 간격 복습 시험 스킬. 기본은 손글씨용 PDF 복습 시험지, chat이면 대화형(채점은 grade chat). 사용자가 "복습", "/genius:review"라고 하면 사용한다. 채점은 grade가 맡는다. 경로는 플러그인 설정(userConfig), PDF 스크립트는 macOS 전용
+description: 학습 로그에서 다음 복습일이 된 행만 골라 다른 각도로 다시 내는 간격 복습 시험 스킬. 기본은 손글씨용 PDF 복습 시험지, chat이면 대화형(채점은 grade chat). 사용자가 "복습", "/genius:review"라고 하면 사용한다. 채점은 grade가 맡는다. 경로는 플러그인 설정(userConfig)
 argument-hint: "[문제 수] [chat]"
 disable-model-invocation: false
 ---

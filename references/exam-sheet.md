@@ -17,17 +17,22 @@
 - 제목 `시험지`(복습은 `복습 시험지`), 문제 수, "TIL을 보지 않고 풀기" (날짜는 파일 이름에만 넣고 본문에는 넣지 않는다)
 - 제목 아래 안내 한 줄: "확신이 없으면 답 옆에 ? 표시, 찾아봤다면 (참고함)이라고 적기"
 - 문제마다 `.q` 블록(`page-break-inside: avoid`)에 번호, 문제 문장, 답안칸(`.ans`). **유형 태그(설명하기, 오류 찾기 등)는 시험지에 표시하지 않는다.** 유형은 출제와 학습 로그에서만 쓴다.
-- 번호는 `1.`처럼 줄 맨 앞(왼쪽 여백)에 둔다. 채점 때 `cropq.swift`가 이 번호 위치로 문제를 잘라낸다.
+- 번호는 `1.`처럼 줄 맨 앞(왼쪽 여백)에 둔다. 채점 때 `cropq.py`가 이 번호 위치로 문제를 잘라낸다.
 - **쪽 배치: 한 페이지를 위아래 반으로 나눠 페이지당 2문제만 넣는다.** 구현: 페이지마다 `<div class="page">`로 감싸고(`@page { margin:12mm 16mm }`, `.page { height:250mm; display:flex; flex-direction:column; page-break-after:always }`, 높이가 이보다 크면 빈 페이지가 끼므로 넘기지 않는다), 그 안에 문제 블록 두 개(`.q { flex:1 1 0; display:flex; flex-direction:column }`)를 넣는다. 문제 문장 아래 남는 공간 전체가 답안칸(`.ans { flex:1 }`)이 된다. 번호는 첫 문단 안에 `<b>1.</b>`로 넣는다(줄 맨 앞). 문제 수가 홀수라 마지막에 혼자 남는 문제는 그 페이지를 다 써도 된다. 제목과 안내는 첫 페이지 맨 위에 짧게 두고, 그만큼 첫 페이지의 두 칸을 조금 줄인다.
 - 문제와 자료(출력, 인용)만으로 반 칸의 절반을 넘어 답 쓸 공간이 부족하면, 그 문제는 **한 페이지 전체**를 쓴다(높이 약 245mm). 이때도 한 페이지에 3문제 이상 넣지 않는다. 실습 과제는 항상 한 페이지 전체를 쓴다.
-- 실물 읽기의 출력은 `<pre>`(Menlo 8.5~9pt, 옅은 회색 배경)로 넣고, 길면 필요한 줄만 남기고 생략한 곳에 `...`를 쓴다.
-- 폰트는 `"Apple SD Gothic Neo"`, 본문 11pt, 오류 찾기 문제는 틀린 문장을 본문에 인용한다.
+- 실물 읽기의 출력은 `<pre>`(`Menlo, Consolas, monospace` 8.5~9pt, 옅은 회색 배경)로 넣고, 길면 필요한 줄만 남기고 생략한 곳에 `...`를 쓴다.
+- 폰트는 `"Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif`(OS마다 있는 한글 글꼴을 고르게), 본문 11pt, 오류 찾기 문제는 틀린 문장을 본문에 인용한다.
 
 # PDF 변환
-macOS 기본 WebKit을 쓰는 스크립트로 변환한다(설치 불필요, **macOS에서만 동작**).
+설치된 Chromium 계열 브라우저(Chrome, Edge, Whale 등)의 headless 인쇄로 변환한다(macOS·Windows·Linux 공통, 쪽 크기 A4).
 ```bash
-swift "<ROOT>/scripts/html2pdf.swift" <시험지.html> "<시험지.pdf>"
+python3 "<ROOT>/scripts/html2pdf.py" <시험지.html> "<시험지.pdf>"
 ```
-`CFURL...` 경고는 무시해도 된다. 변환 후 PDF를 읽어 한글, 쪽 나눔, 답안칸이 정상인지 확인한다.
+변환 후 PDF를 읽어 한글, 쪽 나눔, 답안칸이 정상인지 확인한다.
+
+# 스크립트 실행
+- `<ROOT>/scripts/`의 Python 스크립트는 Python 3과 `pymupdf`(`cropq.py`, `renderpages.py`)가 필요하다. `ModuleNotFoundError: pymupdf`가 나면 사용자에게 `pip install pymupdf`를 안내한다. 대신 설치하지 않는다.
+- Windows에서 `python3`이 없으면 `python`이나 `py`로 실행한다.
+- 브라우저를 못 찾으면 사용자에게 Chromium 계열 브라우저(Chrome, Edge, Whale 등) 설치, 또는 `GENIUS_BROWSER` 환경 변수에 실행 파일 경로 지정을 안내한다.
 
 사용자에게는 파일 위치만 짧게 알린다. 특정 기기의 사용법은 설명하지 않는다. 다 풀면 `/genius:grade`를 하도록 안내한다.

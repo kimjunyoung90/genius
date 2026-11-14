@@ -27,7 +27,7 @@ disable-model-invocation: false
 # 3. 초안 만들기
 1. 양식의 칸마다 내용을 채운다. 제목은 양식의 접두어(`[문제] `, `[제안] `) 뒤에 한 줄 요약을 붙인다.
 2. **공부 내용과 개인 정보를 뺀다.** 노트 원문, 문제와 답안 원문, 학습 로그 내용, 로컬 경로, 사람 이름, 회사 이름은 넣지 않는다. "노트에 없는 개념을 물었다", "3문항 중 1문항의 필기가 잘렸다"처럼 일반화한다. 재현에 특정 개념 이름이 꼭 필요하면 넣어도 되는지 묻는다.
-3. 버전과 환경은 직접 모은다: `plugin.json`의 `version`, `sw_vers -productVersion`, `claude --version`.
+3. 버전과 환경은 직접 모은다: `plugin.json`의 `version`, OS와 버전(macOS는 `sw_vers -productVersion`, Windows는 `ver`), `claude --version`.
 4. 초안을 대화창에 보여 준다.
 
 # 4. 등록
