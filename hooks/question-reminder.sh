@@ -16,8 +16,8 @@ if printf '%s' "$prompt" | grep -Eq '뭐야|뭔데|뭐지|무슨|인가|건가|�
 
 프롬프트에는 다음을 넣는다.
 - 사용자 문장 원문(고치지 않고)
-- 상황
-- 답의 핵심 1~3문장
+- 배경(어떤 일을 하다가 무엇을 몰랐는지)
+- 답의 핵심(맞는 내용과 이유)
 - 틀린 이해면 무엇을 잘못 알았는지
 - 노트 폴더 $CLAUDE_PLUGIN_OPTION_NOTES_PATH
 - genius 폴더 $CLAUDE_PLUGIN_OPTION_GENIUS_PATH
