@@ -1,6 +1,6 @@
 ---
 name: review
-description: 학습 로그에서 다음 복습일이 된 행만 골라 다른 각도로 다시 내는 간격 복습 시험 스킬. 기본은 손글씨용 PDF 복습 시험지, chat이면 대화형. 사용자가 "복습", "/genius:review"라고 하면 사용한다. 채점은 grade가 맡는다. 경로는 플러그인 설정(userConfig), PDF 스크립트는 macOS 전용
+description: 학습 로그에서 다음 복습일이 된 행만 골라 다른 각도로 다시 내는 간격 복습 시험 스킬. 기본은 손글씨용 PDF 복습 시험지, chat이면 대화형(채점은 grade chat). 사용자가 "복습", "/genius:review"라고 하면 사용한다. 채점은 grade가 맡는다. 경로는 플러그인 설정(userConfig), PDF 스크립트는 macOS 전용
 argument-hint: "[문제 수] [chat]"
 disable-model-invocation: false
 ---
@@ -13,7 +13,6 @@ disable-model-invocation: false
 - 학습 로그 형식(단계와 간격): `<ROOT>/references/learning-log-format.md`
 - 출제 원칙: `<ROOT>/references/exam-questions.md`
 - 시험지 경로·형식·PDF 변환: `<ROOT>/references/exam-sheet.md`
-- 대화형 채점과 학습 로그 갱신: `<ROOT>/references/grading.md`
 
 # 1. 입력 해석
 - 기본은 PDF 복습 시험지다(사용자가 손글씨를 선호한다). `chat`이 붙으면 대화형으로 한 문제씩 낸다.
@@ -40,8 +39,8 @@ disable-model-invocation: false
 # 5. 시험지 만들기
 - PDF면 `exam-sheet.md`의 복습 경로(`<GENIUS>/복습/YYYY-MM-DD 복습 시험지.pdf`, `<GENIUS>/.답안지/YYYY-MM-DD 복습.md`)와 형식으로 만든다. 답안지에는 문항마다 **원래 학습 로그 행(날짜, 문제)**을 함께 적어 둔다.
 - 다 풀면 `/genius:grade`로 채점하라고 안내한다. grade가 원래 행을 갱신한다.
-- `chat`이면 한 번에 한 문제씩 내고 `grading.md`에 따라 채점한 뒤, "학습 로그 갱신"대로 원래 행을 갱신한다.
+- `chat`이면 PDF 없이 같은 답안지만 저장하고(제목 끝에 ` (대화형)`), `test`의 대화형 시험(4번)처럼 한 문제씩 내고 답만 받는다. 채점과 원래 행 갱신은 `/genius:grade chat`이 한다.
 
 # 주의
 - 응답은 한국어로 하고, 부연 설명에 em-dash(—)를 쓰지 않는다.
-- 쓰기는 `<GENIUS>/복습/`, `<GENIUS>/.답안지/`(복습 답안지), `<GENIUS>/학습 로그.md`(대화형)에만 한다.
+- 쓰기는 `<GENIUS>/복습/`, `<GENIUS>/.답안지/`(복습 답안지)에만 한다.
