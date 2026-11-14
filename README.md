@@ -23,8 +23,6 @@
 
 ## 설치
 
-개인 마켓플레이스 [kimjunyoung90/claude-plugins](https://github.com/kimjunyoung90/claude-plugins)로 배포합니다.
-
 ```
 /plugin marketplace add kimjunyoung90/claude-plugins
 /plugin install genius@kimjunyoung90
