@@ -274,7 +274,7 @@ code {
   <h2>3. 학습 단계</h2>
   <p>학습 로그에 기록된 몰랐던 것 하나가 졸업할 때까지 거치는 단계입니다. 단계마다 시험을 보고, 오답노트 검사를 통과해야 그 단계가 끝납니다. 다음 단계는 끝낸 날부터 간격만큼 뒤에 나옵니다. 틀려도 단계는 되돌아가지 않습니다.</p>
   <div class="card">
-    <svg viewBox="0 0 880 300" role="img" aria-label="학습 단계와 단계 안의 상태">
+    <svg viewBox="0 0 880 320" role="img" aria-label="학습 단계와 한 단계 안에서 하는 일">
       <defs>
         <marker id="b-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="mk-accent"/></marker>
         <marker id="b-warn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="mk-warn"/></marker>
@@ -291,18 +291,20 @@ code {
         <path d="M160 58 H196" marker-end="url(#b-accent)"/><path d="M340 58 H376" marker-end="url(#b-accent)"/>
         <path d="M520 58 H556" marker-end="url(#b-accent)"/><path d="M700 58 H736" marker-end="url(#b-accent)"/>
       </g>
-      <text x="440" y="128" text-anchor="middle" class="muted" font-size="13">각 단계 안의 상태</text>
+      <text x="440" y="132" text-anchor="middle" class="muted" font-size="13">한 단계 안에서 하는 일</text>
       <g font-size="14" text-anchor="middle">
-        <rect x="40" y="150" width="140" height="50" rx="8" class="node"/><text x="110" y="180">풀이 대기</text>
-        <rect x="260" y="150" width="160" height="50" rx="8" class="node"/><text x="340" y="180">오답노트 대기</text>
-        <rect x="500" y="150" width="140" height="50" rx="8" class="node"/><text x="570" y="180">다시 쓰기</text>
-        <rect x="720" y="150" width="120" height="50" rx="8" class="node-ok"/><text x="780" y="180" font-weight="700">완료</text>
+        <rect x="20" y="160" width="120" height="50" rx="8" class="node"/><text x="80" y="190">문제 풀이</text>
+        <rect x="190" y="160" width="110" height="50" rx="8" class="node"/><text x="245" y="190">채점</text>
+        <rect x="350" y="160" width="150" height="50" rx="8" class="node"/><text x="425" y="190">오답노트 작성</text>
+        <rect x="550" y="160" width="110" height="50" rx="8" class="node"/><text x="605" y="190">검사</text>
+        <rect x="730" y="160" width="120" height="50" rx="8" class="node-ok"/><text x="790" y="190" font-weight="700">완료</text>
       </g>
-      <path d="M180 175 H256" class="arrow" marker-end="url(#b-muted)"/><text x="218" y="167" text-anchor="middle" class="muted" font-size="11">채점</text>
-      <path d="M420 175 H496" class="arrow-warn" marker-end="url(#b-warn)"/><text x="458" y="167" text-anchor="middle" class="muted" font-size="11">검사 탈락</text>
-      <path d="M570 200 C570 250, 340 250, 340 204" class="arrow" marker-end="url(#b-muted)"/><text x="455" y="262" text-anchor="middle" class="muted" font-size="11">다시 정리 후 검사</text>
-      <path d="M340 150 C340 110, 780 110, 780 146" class="arrow-accent" marker-end="url(#b-accent)"/><text x="600" y="108" text-anchor="middle" class="muted" font-size="11">검사 통과</text>
-      <path d="M110 200 C110 290, 780 290, 780 204" class="arrow-accent" marker-end="url(#b-accent)"/><text x="440" y="290" text-anchor="middle" class="muted" font-size="11">다 맞힘</text>
+      <path d="M140 185 H186" class="arrow" marker-end="url(#b-muted)"/>
+      <path d="M300 185 H346" class="arrow" marker-end="url(#b-muted)"/>
+      <path d="M500 185 H546" class="arrow" marker-end="url(#b-muted)"/>
+      <path d="M660 185 H726" class="arrow-accent" marker-end="url(#b-accent)"/><text x="693" y="177" text-anchor="middle" class="muted" font-size="11">통과</text>
+      <path d="M245 210 C245 310, 790 310, 790 214" class="arrow-accent" marker-end="url(#b-accent)"/><text x="520" y="306" text-anchor="middle" class="muted" font-size="11">다 맞힘</text>
+      <path d="M600 210 C590 240, 440 240, 425 214" class="arrow-warn" marker-end="url(#b-warn)"/><text x="512" y="252" text-anchor="middle" class="muted" font-size="11">탈락: 다시 정리</text>
     </svg>
     <p class="note">끝나지 않은 퀘스트가 있으면 새 시험지는 만들어지지 않고, 남은 단계만 알려 줍니다.</p>
   </div>
