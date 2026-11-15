@@ -110,11 +110,11 @@ code {
 <body>
 <main>
   <h1>genius 설계도</h1>
-  <p class="lead">기록해 둔 몰랐던 것을 기억에서 꺼내 시험 보고, 틀린 것과 모르는 것을 학습 로그에 쌓아 간격을 늘려 가며 다시 시험 보는 학습 시스템입니다.</p>
+  <p class="lead">기록해 둔 몰랐던 것을 기억에서 꺼내 시험 보고, 오답노트로 다시 정리한 뒤 간격을 늘려 가며 다시 시험 보는 학습 시스템입니다. 시험지 한 장이 퀘스트 하나이고, 오답노트 검사를 통과해야 끝납니다.</p>
 
   <!-- 1. 구조 -->
   <h2>1. 구조</h2>
-  <p>시험 → 채점 → 오답 정리 → 복습이 한 바퀴입니다. 모든 바퀴의 중심에는 <b>학습 로그</b>가 있어서, 무엇을 몰랐는지와 언제 다시 볼지를 기억합니다.</p>
+  <p>시험 → 채점 → 오답 정리 → 복습이 한 바퀴입니다. 모든 바퀴의 중심에는 <b>학습 로그</b>가 있어서, 몰랐던 것마다 지금 몇 단계의 어느 상태인지를 기억합니다. 언제 다시 볼지는 이 상태로 계산합니다.</p>
   <div class="card">
     <svg viewBox="0 0 880 410" role="img" aria-label="학습 순환 구조">
       <defs>
@@ -149,9 +149,9 @@ code {
 
       <!-- 학습 로그와 연결 -->
       <path d="M330 140 V216" class="arrow dash" marker-end="url(#a-muted)"/>
-      <text x="340" y="185" class="muted" font-size="12">모든 문항 · 질문 · 틀린 이해</text>
+      <text x="340" y="185" class="muted" font-size="12">단계 상태</text>
       <path d="M550 140 V216" class="arrow dash" marker-end="url(#a-muted)"/>
-      <text x="560" y="185" class="muted" font-size="12">질문 · 틀린 이해</text>
+      <text x="560" y="185" class="muted" font-size="12">검사 통과 여부</text>
       <path d="M770 144 V216" class="arrow dash" marker-start="url(#a-muted)" marker-end="url(#a-muted)"/>
       <text x="780" y="185" class="muted" font-size="12">꺼내고 갱신</text>
       <path d="M110 220 V144" class="arrow dash" marker-end="url(#a-muted)"/>
@@ -172,7 +172,7 @@ code {
   <div class="principles">
     <div class="card"><h3>시험</h3><p>시험은 머릿속에 있는 것을 꺼내는 인출 과정입니다. 이 과정 속에서 기억이 더 단단해집니다.</p></div>
     <div class="card"><h3>채점</h3><p>채점은 정답과 모든 문항의 해설을 확인하는 과정입니다. 맞힌 문항도 해설을 보면 제대로 알고 맞힌 것인지, 어쩌다 맞힌 것인지 가려집니다.</p></div>
-    <div class="card"><h3>오답 정리</h3><p>오답 정리는 해설을 보며 몰랐던 내용을 다시 공부한 다음, 자기만의 언어로 다시 쓰는 과정입니다. 오답노트 작성 시 해설을 보지 않는 게 중요합니다.</p></div>
+    <div class="card"><h3>오답 정리</h3><p>오답 정리는 해설을 보며 몰랐던 내용을 다시 공부한 다음, 자기만의 언어로 다시 쓰는 과정입니다. 오답노트 작성 시 해설을 보지 않는 게 중요합니다. 다 쓰면 검사를 받고, 문항마다 통과해야 그 시험이 끝납니다.</p></div>
     <div class="card"><h3>복습</h3><p>복습은 학습 로그에 남은 내용을 잊을 때쯤 다시 시험 보는 과정입니다. 잊어 갈 때 다시 꺼내야 기억이 오래 남습니다.</p></div>
   </div>
 
@@ -242,7 +242,7 @@ code {
       <rect x="610" y="256" width="260" height="40" rx="10" class="node-store"/>
       <text x="626" y="281" font-size="14" font-weight="700">오답노트</text><text x="856" y="281" text-anchor="end" class="muted" font-size="11">genius 폴더/오답/</text>
       <rect x="610" y="304" width="260" height="40" rx="10" class="node-store"/>
-      <text x="626" y="329" font-size="14" font-weight="700">복습 시험지 <tspan class="muted" font-size="11" font-weight="400">(1~3단계 반복)</tspan></text><text x="856" y="329" text-anchor="end" class="muted" font-size="11">genius 폴더/복습/</text>
+      <text x="626" y="329" font-size="14" font-weight="700">복습 시험지 <tspan class="muted" font-size="11" font-weight="400">(2~4단계)</tspan></text><text x="856" y="329" text-anchor="end" class="muted" font-size="11">genius 폴더/복습/</text>
 
       <!-- 여러 스킬이 함께 쓰는 곳 -->
       <rect x="610" y="428" width="260" height="56" rx="10" class="node-store"/>
