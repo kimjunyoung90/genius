@@ -1,4 +1,4 @@
-"""UserPromptSubmit: 개념 질문·자기 말 요약처럼 보이는 메시지면 question agent 호출 알림과 경로를 컨텍스트에 넣는다."""
+"""UserPromptSubmit: 개념 질문·틀린 이해처럼 보이는 메시지면 question agent 호출 알림과 경로를 컨텍스트에 넣는다."""
 import json
 import os
 import re
@@ -7,7 +7,7 @@ import sys
 KEYWORDS = re.compile(r"뭐야|뭔데|뭐지|무슨|인가|건가|거야|거지|맞지|맞아|아니야|구나|이해했|왜 |차이가|원리")
 
 CONTEXT = """[question]
-이 메시지가 개념 질문이거나, 답을 듣고 자기 말로 정리한 것이거나, 틀린 이해가 드러난 것이면,
+이 메시지가 개념 질문이거나, 틀린 이해가 드러난 것(자기 말 정리에서 드러난 것 포함)이면,
 답한 뒤 genius:question agent를 백그라운드로 불러 기록한다.
 
 학습 로그와 TIL을 직접 읽거나 쓰지 않는다.
