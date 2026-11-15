@@ -3,7 +3,7 @@
 한 줄 = 몰랐던 것 하나:
   {"til": "YYYY-MM-DD#TIL 제목", "stages": [{"stage": 1, "exam": "답안지 이름", "status": "풀이 대기", "done": null}]}
 
-usage: python3 log.py "<GENIUS>" <명령> [인자...] [--date YYYY-MM-DD]
+usage: python3 log.py "<GENIUS>" <명령> [인자...] [--date YYYY-MM-DD] [--intervals 3,14,60]
   add <til>                       새 줄(stages: []). 이미 있으면 그대로 둔다.
   untested                        아직 시험 보지 않은 til (오래된 순)
   due                             복습일이 된 til: "복습일<TAB>다음 단계<TAB>til" (오래된 순)
@@ -15,6 +15,8 @@ usage: python3 log.py "<GENIUS>" <명령> [인자...] [--date YYYY-MM-DD]
   show [검색어]                    사람이 볼 표
   retitle <옛 til> <새 til>         TIL 제목이 바뀌었을 때
   check "<NOTES>"                 형식 검사와 TIL 제목 존재 확인
+
+--intervals: 단계 사이 날 수(플러그인 설정 review_intervals). 개수 + 1이 마지막 단계다. 없으면 3,14,60.
 """
 import datetime
 import json
@@ -26,8 +28,9 @@ import unicodedata
 from pathlib import Path
 
 STATUSES = ("풀이 대기", "오답노트 대기", "다시 쓰기", "완료")
-INTERVAL = {1: 3, 2: 14, 3: 60}  # n단계를 끝낸 뒤 n+1단계까지의 날 수
-LAST_STAGE = 4
+DEFAULT_INTERVALS = "3,14,60"
+INTERVALS = []  # INTERVALS[n-1] = n단계를 끝낸 뒤 n+1단계까지의 날 수. main에서 정한다
+LAST_STAGE = 0
 TIL_RE = re.compile(r"^\d{4}-\d{2}-\d{2}#\S.*$")
 DATE_RE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 
@@ -50,8 +53,8 @@ def validate(rec, where):
     for i, s in enumerate(rec["stages"], 1):
         if set(s) != {"stage", "exam", "status", "done"}:
             die(f"{where}: 단계 키는 stage, exam, status, done만 허용 ({sorted(s)})")
-        if s["stage"] != i or i > LAST_STAGE:
-            die(f"{where}: stage는 1부터 {LAST_STAGE}까지 차례로 ({s['stage']})")
+        if s["stage"] != i:
+            die(f"{where}: stage는 1부터 차례로 ({s['stage']})")
         if not isinstance(s["exam"], str) or not s["exam"].strip():
             die(f"{where}: exam이 비었다")
         if s["status"] not in STATUSES:
@@ -103,7 +106,7 @@ def due_date(rec):
     if not st or st[-1]["status"] != "완료" or st[-1]["stage"] >= LAST_STAGE:
         return None
     last = st[-1]
-    return (datetime.date.fromisoformat(last["done"]) + datetime.timedelta(days=INTERVAL[last["stage"]])).isoformat()
+    return (datetime.date.fromisoformat(last["done"]) + datetime.timedelta(days=INTERVALS[last["stage"] - 1])).isoformat()
 
 
 def stage_of(rec, exam):
@@ -113,8 +116,25 @@ def stage_of(rec, exam):
     die(f"{rec['til']}: 시험 '{exam}'에 나온 단계가 없다")
 
 
+def set_intervals(text):
+    global INTERVALS, LAST_STAGE
+    try:
+        days = [int(x) for x in text.replace(" ", "").split(",")]
+    except ValueError:
+        days = []
+    if not days or any(d < 1 for d in days):
+        die(f"--intervals는 1 이상의 날 수를 쉼표로 ({text!r})")
+    INTERVALS, LAST_STAGE = days, len(days) + 1
+
+
 def main():
     args = sys.argv[1:]
+    intervals = DEFAULT_INTERVALS
+    if "--intervals" in args:
+        i = args.index("--intervals")
+        intervals = args[i + 1] if i + 1 < len(args) else ""
+        del args[i:i + 2]
+    set_intervals(intervals)
     today = datetime.date.today().isoformat()
     if "--date" in args:
         i = args.index("--date")
@@ -195,7 +215,7 @@ def main():
             st = r["stages"]
             if not st:
                 state = "시험 전"
-            elif st[-1]["stage"] == LAST_STAGE and st[-1]["status"] == "완료":
+            elif st[-1]["stage"] >= LAST_STAGE and st[-1]["status"] == "완료":
                 state = "졸업"
             else:
                 state = f"{st[-1]['stage']}단계 · {st[-1]['status']}"

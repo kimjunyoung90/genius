@@ -27,9 +27,9 @@ disable-model-invocation: false
 - 숫자가 있으면 한 번에 낼 문제 수로 쓴다.
 
 # 2. 복습할 행 고르기
-1. `python3 "<ROOT>/scripts/log.py" "<GENIUS>" due`로 복습일이 된 til을 모은다(복습일, 다음 단계, til 순, 오래된 순). 없으면 "오늘 복습할 문제가 없다"고 알리고 끝낸다.
+1. `python3 "<ROOT>/scripts/log.py" "<GENIUS>" due --intervals "${user_config.review_intervals}"`로 복습일이 된 til을 모은다(복습일, 다음 단계, til 순, 오래된 순). 없으면 "오늘 복습할 문제가 없다"고 알리고 끝낸다.
 2. til이 가리키는 TIL(`<NOTES>/YYYY-MM-DD.md`의 그 `##` 제목 아래)을 근거로 쓴다. `- 노트:` 줄이 있으면 그 노트도 함께 쓴다. 지난 단계의 답안지(학습 로그 `exam`)도 읽어 같은 문제를 피한다. 근거를 찾지 못한 til은 출제하지 말고 목록으로 알린다.
-3. **한 번에 낼 문제 수**: 인자의 숫자, 없으면 `${user_config.review_limit}`개(설정하지 않았으면 7개). 같은 개념의 til은 묶어 한 문제로 세므로 til 수보다 문제 수가 적을 수 있다.
+3. **한 번에 낼 문제 수**: 인자의 숫자, 없으면 `${user_config.exam_limit}`개(설정하지 않았으면 5개). 실습 과제도 이 수에 센다. 같은 개념의 til은 묶어 한 문제로 세므로 til 수보다 문제 수가 적을 수 있다.
 4. **넘치면** 복습일이 오래된 것부터 낸다. 못 낸 til은 그대로 두어 다음 복습에서 먼저 나오게 한다.
 5. 밀린 til이 상한의 두 배를 넘으면 시작 메시지에 밀린 개수만 알린다. 문제 수를 늘리거나 복습을 더 하라고 권하지 않는다.
 
@@ -42,7 +42,7 @@ disable-model-invocation: false
 - 시험지에는 질문만 넣는다. 이전 내 답이나 오답노트 정리는 넣지 않는다.
 
 # 4. 시험지 만들기
-- PDF면 `exam-sheet.md`의 복습 경로(이름 `YYYY-MM-DD 복습`)와 형식으로 만든다. 답안지에는 문항마다 `- TIL: <til>` 줄을 적고, `python3 "<ROOT>/scripts/log.py" "<GENIUS>" issue "<exam>" "<til>" ...`로 출제한 til을 모두 기록한다(다음 단계가 `풀이 대기`로 붙는다).
+- PDF면 `exam-sheet.md`의 복습 경로(이름 `YYYY-MM-DD 복습`)와 형식으로 만든다. 답안지에는 문항마다 `- TIL: <til>` 줄을 적고, `python3 "<ROOT>/scripts/log.py" "<GENIUS>" issue "<exam>" "<til>" ... --intervals "${user_config.review_intervals}"`로 출제한 til을 모두 기록한다(다음 단계가 `풀이 대기`로 붙는다).
 - 다 풀면 `/genius:grade`로 채점하라고 안내한다. 이 퀘스트는 오답노트 검사 통과까지 가야 끝난다.
 - `chat`이면 PDF 없이 같은 답안지만 저장하고 `issue`로 기록한 뒤(이름 끝에 ` (대화형)`), `test`의 대화형 시험(4번)처럼 한 문제씩 내고 답만 받는다. 채점은 `/genius:grade chat`이 한다.
 

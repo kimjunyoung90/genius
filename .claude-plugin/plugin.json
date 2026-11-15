@@ -1,7 +1,7 @@
 {
   "name": "genius",
   "description": "손글씨 PDF 시험(test)·채점(grade)·오답 정리(note)·간격 복습(review)과, 대화 중 개념 질문을 학습 로그와 TIL에 기록(question agent)하고, 플러그인 피드백을 GitHub Issue로 등록하는(feedback) 스킬 세트",
-  "version": "8.0.0",
+  "version": "9.0.0",
   "author": {
     "name": "Kim Junyoung"
   },
@@ -19,12 +19,18 @@
       "description": "학습 로그와 시험지·해설지·오답노트가 저장되는 경로",
       "required": true
     },
-    "review_limit": {
+    "exam_limit": {
       "type": "number",
-      "title": "복습 문제 수",
-      "description": "/genius:review가 한 번에 내는 복습 문제 수",
-      "default": 7,
+      "title": "한 번에 낼 문제 수",
+      "description": "첫 시험(/genius:test)과 복습(/genius:review)이 시험지 한 장에 내는 문제 수. 실습 과제도 포함한다",
+      "default": 5,
       "min": 1
+    },
+    "review_intervals": {
+      "type": "string",
+      "title": "복습 간격(일)",
+      "description": "단계를 끝낸 뒤 다음 복습까지의 날 수를 쉼표로. 예: 3,14,60이면 3일·14일·60일 뒤 복습하고, 마지막 복습을 끝내면 졸업",
+      "default": "3,14,60"
     }
   }
 }
