@@ -45,6 +45,7 @@ python3 "<ROOT>/scripts/log.py" "<GENIUS>" add "<til>"
 python3 "<ROOT>/scripts/log.py" "<GENIUS>" untested          # 첫 시험 대상
 python3 "<ROOT>/scripts/log.py" "<GENIUS>" due --intervals "<간격>"   # 복습 대상: 복습일, 다음 단계, til
 python3 "<ROOT>/scripts/log.py" "<GENIUS>" issue "<exam>" "<til>" ... --intervals "<간격>"
+python3 "<ROOT>/scripts/log.py" "<GENIUS>" unissue "<exam>"     # 풀기 전 시험지 취소(다시 출제할 때)
 python3 "<ROOT>/scripts/log.py" "<GENIUS>" grade "<exam>" "<til>" 정답|오답노트
 python3 "<ROOT>/scripts/log.py" "<GENIUS>" note "<exam>" "<til>" 통과|"다시 쓰기"
 python3 "<ROOT>/scripts/log.py" "<GENIUS>" regrade "<exam>" "<til>" 정답|오답노트   # 채점 판정 정정

@@ -8,6 +8,7 @@ usage: python3 log.py "<GENIUS>" <명령> [인자...] [--date YYYY-MM-DD] [--int
   untested                        아직 시험 보지 않은 til (오래된 순)
   due                             복습일이 된 til: "복습일<TAB>다음 단계<TAB>til" (오래된 순)
   issue <exam> <til>...           다음 단계를 풀이 대기로 추가
+  unissue <exam>                  풀기 전인 시험지를 취소: 그 exam의 풀이 대기 단계를 지운다
   grade <exam> <til> 정답|오답노트   정답이면 완료, 아니면 오답노트 대기
   note <exam> <til> 통과|다시 쓰기    오답노트 검사 결과
   regrade <exam> <til> 정답|오답노트  채점 판정을 고칠 때(그 til의 마지막 단계만)
@@ -175,6 +176,19 @@ def main():
             st.append({"stage": len(st) + 1, "exam": exam, "status": "풀이 대기", "done": None})
         log.save()
         print(f"출제 {len(tils)}개")
+    elif cmd == "unissue" and len(rest) == 1:
+        exam, n = rest[0], 0
+        for r in log.recs:
+            st = r["stages"]
+            if any(s["exam"] == exam and s["status"] != "풀이 대기" for s in st):
+                die(f"{r['til']}: {exam}은 이미 채점이 시작되어 취소할 수 없다")
+            if st and st[-1]["exam"] == exam:
+                st.pop()
+                n += 1
+        if not n:
+            die(f"{exam}: 취소할 단계가 없다")
+        log.save()
+        print(f"취소 {n}개")
     elif cmd == "grade" and len(rest) == 3 and rest[2] in ("정답", "오답노트"):
         s = stage_of(log.find(rest[1]), rest[0])
         if s["status"] != "풀이 대기":
