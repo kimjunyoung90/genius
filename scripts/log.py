@@ -15,7 +15,7 @@ usage: python3 log.py "<GENIUS>" <명령> [인자...] [--date YYYY-MM-DD] [--int
   quests                          끝나지 않은 퀘스트: "exam<TAB>상태별 개수"
   show [검색어]                    사람이 볼 표
   retitle <옛 til> <새 til>         TIL 제목이 바뀌었을 때
-  remove <til>...                 시험 전(stages 비어 있음)인 til을 지운다. 기록이 불필요할 때
+  remove <til>...                 더 공부하지 않을 til을 지운다(진행 중인 시험이 있으면 거부)
   check "<NOTES>"                 형식 검사와 TIL 제목 존재 확인
 
 --intervals: 단계 사이 날 수(플러그인 설정 review_intervals). 개수 + 1이 마지막 단계다. 없으면 3,14,60.
@@ -193,8 +193,8 @@ def main():
     elif cmd == "remove" and rest:
         for til in rest:
             r = log.find(til)
-            if r["stages"]:
-                die(f"{til}: 이미 출제된 til은 지우지 않는다")
+            if any(st["status"] != "완료" for st in r["stages"]):
+                die(f"{til}: 진행 중인 시험이 있어 지우지 않는다")
         log.recs = [r for r in log.recs if r["til"] not in rest]
         log.save()
         print(f"삭제 {len(rest)}개")

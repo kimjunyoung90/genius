@@ -52,7 +52,7 @@ python3 "<ROOT>/scripts/log.py" "<GENIUS>" regrade "<exam>" "<til>" 정답|오�
 python3 "<ROOT>/scripts/log.py" "<GENIUS>" quests            # 끝나지 않은 퀘스트
 python3 "<ROOT>/scripts/log.py" "<GENIUS>" show [검색어] --intervals "<간격>"
 python3 "<ROOT>/scripts/log.py" "<GENIUS>" retitle "<옛 til>" "<새 til>"
-python3 "<ROOT>/scripts/log.py" "<GENIUS>" remove "<til>" ...     # 시험 전 til 삭제(TIL 본문의 그 ## 절도 함께 지운다)
+python3 "<ROOT>/scripts/log.py" "<GENIUS>" remove "<til>" ...     # 더 공부하지 않을 til 삭제(진행 중인 시험이 있으면 거부). TIL 노트는 참고용으로 남겨도 된다
 python3 "<ROOT>/scripts/log.py" "<GENIUS>" check "<NOTES>"   # 형식과 TIL 제목 확인
 ```
 
